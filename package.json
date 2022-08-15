@@ -1,0 +1,20 @@
+{
+  "name": "metastrike",
+  "version": "1.0.0",
+  "description": "Backend APIs for MetaStrike",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon public/index.js"
+  },
+  "keywords": [
+    "metastrike"
+  ],
+  "author": "Asad Ali Haider & Rana Ifran Saleem",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1",
+    "mongoose": "^6.5.1",
+    "nodemon": "^2.0.19"
+  }
+}
