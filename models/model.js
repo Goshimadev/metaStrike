@@ -33,22 +33,70 @@ const dataSchema = new mongoose.Schema({
         required: true,
         type: Number
     },
-    long_gun: {
-        required: true,
-        type: Array
-    },
-    pistol: {
-        required: true,
-        type: Array
-    },
-    knife: {
-        required: true,
-        type: Array
-    },
-    gernade: {
-        required: true,
-        type: Array
-    }
+    long_gun: [
+        {
+            title: {
+                type: String,
+                required : true,
+            },
+            nft: {
+                type: String,
+                required : true,
+            },
+            lock: {
+                type: Boolean,
+                required : true,
+            }
+        }
+    ],
+    pistol: [
+        {
+            title: {
+                type: String,
+                required : true,
+            },
+            nft: {
+                type: String,
+                required : true,
+            },
+            lock: {
+                type: Boolean,
+                required : true,
+            }
+        }
+    ],
+    knife: [
+        {
+            title: {
+                type: String,
+                required : true,
+            },
+            nft: {
+                type: String,
+                required : true,
+            },
+            lock: {
+                type: Boolean,
+                required : true,
+            }
+        }
+    ],
+    gernade: [
+        {
+            title: {
+                type: String,
+                required : true,
+            },
+            nft: {
+                type: String,
+                required : true,
+            },
+            lock: {
+                type: Boolean,
+                required : true,
+            }
+        }
+    ]
 })
 
 module.exports = mongoose.model('users', dataSchema)
