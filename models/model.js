@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const dataSchema = new mongoose.Schema({
-    name: {
+    username: {
         required: true,
         type: String
     },
@@ -17,84 +17,128 @@ const dataSchema = new mongoose.Schema({
         required: true,
         type: String
     },
-    guide: {
-        required: true,
-        type: String
-    },
-    MTS: {
+    online: {
         required: true,
         type: Number
     },
-    MTT: {
+    mts: {
         required: true,
         type: Number
     },
-    splinter: {
+    mtp: {
         required: true,
         type: Number
     },
-    long_gun: [
+    gun: [
         {
-            title: {
-                type: String,
-                required : true,
-            },
             nft: {
                 type: String,
                 required : true,
             },
-            lock: {
+            equipped: {
                 type: Boolean,
                 required : true,
-            }
+            },
+            ammo: {
+                type: Number,
+                required : true,
+            },
+            capacity: {
+                type: Number,
+                required : true,
+            },
+            power: {
+                type: Number,
+                required : true,
+            },
+            range: {
+                type: Number,
+                required : true,
+            },
+            stability: {
+                type: Number,
+                required : true,
+            },
+            rate: {
+                type: Number,
+                required : true,
+            },
+            slot: {
+                type: Number,
+                required : true,
+            },
+            level: {
+                type: Number,
+                required : true,
+            },
+            upgradePoints: {
+                type: Number,
+                required : true,
+            },
+            metalList: [
+                {
+                    name: {
+                        type: String,
+                        required : true,
+                    }
+                }
+            ],
         }
     ],
-    pistol: [
+    armor: [
         {
-            title: {
-                type: String,
-                required : true,
-            },
             nft: {
                 type: String,
                 required : true,
             },
-            lock: {
+            equipped: {
                 type: Boolean,
                 required : true,
-            }
+            },
+            slot: {
+                type: Number,
+                required : true,
+            },
+            level: {
+                type: Number,
+                required : true,
+            },
+            upgradePoints: {
+                type: Number,
+                required : true,
+            },
+            metalList: [
+                {
+                    name: {
+                        type: String,
+                        required : true,
+                    }
+                }
+            ]
         }
     ],
-    knife: [
+    splinter: [
         {
-            title: {
+            name: {
                 type: String,
                 required : true,
             },
-            nft: {
-                type: String,
+            quantity: {
+                type: Number,
                 required : true,
             },
-            lock: {
-                type: Boolean,
-                required : true,
-            }
         }
     ],
-    gernade: [
+    metal: [
         {
-            title: {
+            name: {
                 type: String,
                 required : true,
             },
-            nft: {
-                type: String,
+            quantity: {
+                type: Number,
                 required : true,
             },
-            lock: {
-                type: Boolean,
-                required : true,
-            }
         }
     ]
 })
