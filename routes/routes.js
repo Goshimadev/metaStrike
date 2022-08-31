@@ -28,20 +28,7 @@ router.get('/getUserApi/:id', async (req, res) => {
 
 // RegisterAPI/Sign Up
 router.post('/registerAPI', async (req, res) => {
-    const data = new Model({
-        name: req.body.name,
-        password: req.body.password,
-        email: req.body.email,
-        wallet: req.body.wallet,
-        guide: req.body.guide,
-        MTS: req.body.mts,
-        MTT: req.body.mtt,
-        splinter: req.body.splinter,
-        long_gun: req.body.long_gun,
-        pistol: req.body.pistol,
-        knife: req.body.knife,
-        gernade: req.body.gernade
-    })
+    const data = new Model( req.body )
     try {
         const dataToSave = await data.save();
         res.status(200).json(dataToSave)
