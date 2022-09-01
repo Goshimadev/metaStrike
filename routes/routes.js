@@ -43,28 +43,27 @@ router.patch('/updateUserApi/:id', async (req, res) => {
     try {
         const id = req.params.id;
         const updatedData = {
-            name: req.body.name,
+            username: req.body.username,
             password: req.body.password,
             email: req.body.email,
             wallet: req.body.wallet,
-            guide: req.body.guide,
-            MTS: req.body.mts,
-            MTT: req.body.mtt,
-            splinter: req.body.splinter,
+            online: req.body.online,
+            mts: req.body.mts,
+            mtp: req.body.mtp,
             $addToSet: {
-                long_gun: req.body.long_gun
+                gun: req.body.gun
             },
             $addToSet: {
-                pistol: req.body.pistol
+                armor: req.body.armor
+            },
+            $addToSet: { 
+                splinter: req.body.splinter
             },
             $addToSet: {
-                knife: req.body.knife
-            },
-            $addToSet: {
-                gernade: req.body.gernade
+                metal: req.body.metal
             }
         }
-        const options = { new: true };
+        const options = { new: true, runValidators: true };
         const result = await Model.findByIdAndUpdate(
             id, updatedData, options
         )
@@ -79,7 +78,7 @@ router.patch('/updateUserApi/:id', async (req, res) => {
 router.patch('/setUserApi/:id', async (req, res) => {
     try {
         const id = req.params.id;
-        const updatedData = {
+        const userData = {
             MTS: req.body.mts,
             MTT: req.body.mtt,
             splinter: req.body.splinter,
@@ -87,7 +86,7 @@ router.patch('/setUserApi/:id', async (req, res) => {
         }
         const options = { new: true };
         const result = await Model.findByIdAndUpdate(
-            id, updatedData, options
+            id, userData, options
         )
         res.send(result)
     }
@@ -101,7 +100,7 @@ router.delete('/delete/:id', async (req, res) => {
     try {
         const id = req.params.id;
         const data = await Model.findByIdAndDelete(id)
-        res.send(`Document with ${data.name} has been deleted..`)
+        res.send(`Document with ${data.username} has been deleted..`)
     }
     catch (error) {
         res.status(400).json({ message: error.message })
