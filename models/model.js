@@ -1,144 +1,72 @@
 const mongoose = require('mongoose');
 
+const stringRequired = {
+    type: String,
+    required: true,
+}
+
+const numberRequired = {
+    type: Number,
+    required: true,
+}
+
+const booleanRequired = {
+    type: Number,
+    required: true,
+}
+
 const dataSchema = new mongoose.Schema({
-    username: {
-        required: true,
-        type: String
-    },
-    password: {
-        required: true,
-        type: String
-    },
-    email: {
-        required: true,
-        type: String
-    },
-    wallet: {
-        required: true,
-        type: String
-    },
-    online: {
-        required: true,
-        type: Number
-    },
-    mts: {
-        required: true,
-        type: Number
-    },
-    mtp: {
-        required: true,
-        type: Number
-    },
+    username: stringRequired,
+    password: stringRequired,
+    email: stringRequired,
+    wallet: stringRequired,
+    online: numberRequired,
+    mts: numberRequired,
+    mtp: numberRequired,
     gun: [
         {
-            nft: {
-                type: String,
-                required : true,
-            },
-            equipped: {
-                type: Boolean,
-                required : true,
-            },
-            ammo: {
-                type: Number,
-                required : true,
-            },
-            capacity: {
-                type: Number,
-                required : true,
-            },
-            power: {
-                type: Number,
-                required : true,
-            },
-            range: {
-                type: Number,
-                required : true,
-            },
-            stability: {
-                type: Number,
-                required : true,
-            },
-            rate: {
-                type: Number,
-                required : true,
-            },
-            slot: {
-                type: Number,
-                required : true,
-            },
-            level: {
-                type: Number,
-                required : true,
-            },
-            upgradePoints: {
-                type: Number,
-                required : true,
-            },
+            nft: stringRequired,
+            equipped: booleanRequired,
+            ammo: numberRequired,
+            capacity: numberRequired,
+            power: numberRequired,
+            range: numberRequired,
+            stability: numberRequired,
+            rate: numberRequired,
+            slot: numberRequired,
+            level: numberRequired,
+            upgradePoints: numberRequired,
             metalList: [
                 {
-                    name: {
-                        type: String,
-                        required : true,
-                    }
+                    name: stringRequired,
                 }
             ],
         }
     ],
     armor: [
         {
-            nft: {
-                type: String,
-                required : true,
-            },
-            equipped: {
-                type: Boolean,
-                required : true,
-            },
-            slot: {
-                type: Number,
-                required : true,
-            },
-            level: {
-                type: Number,
-                required : true,
-            },
-            upgradePoints: {
-                type: Number,
-                required : true,
-            },
+            nft: stringRequired,
+            equipped: booleanRequired,
+            slot: numberRequired,
+            level: numberRequired,
+            upgradePoints: numberRequired,
             metalList: [
                 {
-                    name: {
-                        type: String,
-                        required : true,
-                    }
+                    name: stringRequired,
                 }
             ]
         }
     ],
     splinter: [
         {
-            name: {
-                type: String,
-                required : true,
-            },
-            quantity: {
-                type: Number,
-                required : true,
-            },
+            name: stringRequired,
+            quantity: numberRequired,
         }
     ],
     metal: [
         {
-            name: {
-                type: String,
-                required : true,
-            },
-            quantity: {
-                type: Number,
-                required : true,
-            },
+            name: stringRequired,
+            quantity: numberRequired,
         }
     ]
 })
