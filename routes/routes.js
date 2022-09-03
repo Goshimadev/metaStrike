@@ -42,27 +42,7 @@ router.post('/registerAPI', async (req, res) => {
 router.patch('/updateUserApi/:id', async (req, res) => {
     try {
         const id = req.params.id;
-        const updatedData = {
-            username: req.body.username,
-            password: req.body.password,
-            email: req.body.email,
-            wallet: req.body.wallet,
-            online: req.body.online,
-            mts: req.body.mts,
-            mtp: req.body.mtp,
-            $addToSet: {
-                gun: req.body.gun
-            },
-            $addToSet: {
-                armor: req.body.armor
-            },
-            $addToSet: { 
-                splinter: req.body.splinter
-            },
-            $addToSet: {
-                metal: req.body.metal
-            }
-        }
+        const updatedData = req.body;
         const options = { new: true, runValidators: true };
         const result = await Model.findByIdAndUpdate(
             id, updatedData, options
@@ -79,10 +59,9 @@ router.patch('/setUserApi/:id', async (req, res) => {
     try {
         const id = req.params.id;
         const userData = {
-            MTS: req.body.mts,
-            MTT: req.body.mtt,
+            mts: req.body.mts,
+            mtp: req.body.mtp,
             splinter: req.body.splinter,
-            guide: req.body.guide
         }
         const options = { new: true };
         const result = await Model.findByIdAndUpdate(
@@ -100,7 +79,7 @@ router.delete('/delete/:id', async (req, res) => {
     try {
         const id = req.params.id;
         const data = await Model.findByIdAndDelete(id)
-        res.send(`Document with ${data.username} has been deleted..`)
+        res.send(`Document with username "${data.username}" has been deleted..`)
     }
     catch (error) {
         res.status(400).json({ message: error.message })
