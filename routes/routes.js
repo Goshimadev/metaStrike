@@ -7,7 +7,7 @@ module.exports = router;
 router.get('/getAllUsersApi', async (req, res) => {
     try{
         const data = await Model.find();
-        res.json(data)
+        res.status(200).json(data)
     }
     catch(error){
         res.status(500).json({message: error.message})
@@ -19,7 +19,21 @@ router.get('/getUserApi/:id', async (req, res) => {
     try{
         const id = req.params.id;
         const data = await Model.findById(id);
-        res.json(data)
+        res.status(200).json(data)
+    }
+    catch(error){
+        res.status(500).json({message: error.message})
+    }
+})
+
+//Get Single Users with Username
+router.get('/getUserByNameApi/:username', async (req, res) => {
+    try{
+        const username = req.params.username;
+        const data = await Model.find({username: {$regex : '^'+username+'$', $options : 'i'} })
+        data.length > 0 
+        ? res.status(200).json(data)
+        : res.status(404).json({message: `User with name \'${username}\' not found.`})
     }
     catch(error){
         res.status(500).json({message: error.message})
@@ -47,7 +61,7 @@ router.patch('/updateUserApi/:id', async (req, res) => {
         const result = await Model.findByIdAndUpdate(
             id, updatedData, options
         )
-        res.send(result)
+        res.status(200).send(result)
     }
     catch (error) {
         res.status(400).json({ message: error.message })
@@ -67,7 +81,7 @@ router.patch('/setUserApi/:id', async (req, res) => {
         const result = await Model.findByIdAndUpdate(
             id, userData, options
         )
-        res.send(result)
+        res.status(200).send(result)
     }
     catch (error) {
         res.status(400).json({ message: error.message })
@@ -79,7 +93,7 @@ router.delete('/delete/:id', async (req, res) => {
     try {
         const id = req.params.id;
         const data = await Model.findByIdAndDelete(id)
-        res.send(`Document with username "${data.username}" has been deleted..`)
+        res.send(`Document with username \'${data.username}\' has been deleted..`)
     }
     catch (error) {
         res.status(400).json({ message: error.message })

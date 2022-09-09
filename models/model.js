@@ -5,6 +5,12 @@ const stringRequired = {
     required: true,
 }
 
+const uniqueStringRequired = {
+    type: String,
+    required: true,
+    unique: true,
+}
+
 const numberRequired = {
     type: Number,
     required: true,
@@ -16,7 +22,7 @@ const booleanRequired = {
 }
 
 const dataSchema = new mongoose.Schema({
-    username: stringRequired,
+    username: uniqueStringRequired,
     password: stringRequired,
     email: stringRequired,
     wallet: stringRequired,
