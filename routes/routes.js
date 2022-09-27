@@ -3,6 +3,7 @@ const router = express.Router();
 const User = require('../models/User');
 const Guild = require('../models/Guild');
 const Match = require('../models/Match');
+const Record = require('../models/Record');
 module.exports = router;
 
 //Get All Users
@@ -192,3 +193,46 @@ router.post('/setMatchApi', async (req, res) => {
         res.status(400).json({ message: error.message })
     }
 })
+
+// Record APIs
+
+// Get Single Record
+router.get('/getRecordApi/:id', async (req, res) => {
+    try{
+        const id = req.params.id;
+        const data = await Record.findById(id);
+        res.status(200).json(data)
+    }
+    catch(error){
+        res.status(500).json({message: error.message})
+    }
+})
+
+// Set Record
+router.post('/setRecordApi', async (req, res) => {
+    const data = new Record( req.body )
+    try {
+        const dataToSave = await data.save();
+        res.status(200).json(dataToSave)
+    }
+    catch (error) {
+        res.status(400).json({ message: error.message })
+    }
+})
+
+// Update Record by ID
+router.patch('/updateRecordApi/:id', async (req, res) => {
+    try {
+        const id = req.params.id;
+        const updatedData = req.body;
+        const options = { new: true, runValidators: true };
+        const result = await Record.findByIdAndUpdate(
+            id, updatedData, options
+        )
+        res.status(200).send(result)
+    }
+    catch (error) {
+        res.status(400).json({ message: error.message })
+    }
+})
+
