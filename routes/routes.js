@@ -1,12 +1,12 @@
 const express = require('express');
 const router = express.Router();
-const Model = require('../models/model');
+const User = require('../models/User');
 module.exports = router;
 
 //Get All Users
 router.get('/getAllUsersApi', async (req, res) => {
     try{
-        const data = await Model.find();
+        const data = await User.find();
         res.status(200).json(data)
     }
     catch(error){
@@ -18,7 +18,7 @@ router.get('/getAllUsersApi', async (req, res) => {
 router.get('/getUserApi/:id', async (req, res) => {
     try{
         const id = req.params.id;
-        const data = await Model.findById(id);
+        const data = await User.findById(id);
         res.status(200).json(data)
     }
     catch(error){
@@ -30,7 +30,7 @@ router.get('/getUserApi/:id', async (req, res) => {
 router.get('/getUserByNameApi/:username', async (req, res) => {
     try{
         const username = req.params.username;
-        const data = await Model.find({username: {$regex : '^'+username+'$', $options : 'i'} })
+        const data = await User.find({username: {$regex : '^'+username+'$', $options : 'i'} })
         data.length > 0 
         ? res.status(200).json(data)
         : res.status(404).json({message: `User with name \'${username}\' not found.`})
@@ -42,7 +42,7 @@ router.get('/getUserByNameApi/:username', async (req, res) => {
 
 // RegisterAPI/Sign Up
 router.post('/registerAPI', async (req, res) => {
-    const data = new Model( req.body )
+    const data = new User( req.body )
     try {
         const dataToSave = await data.save();
         res.status(200).json(dataToSave)
@@ -58,7 +58,7 @@ router.patch('/updateUserApi/:id', async (req, res) => {
         const id = req.params.id;
         const updatedData = req.body;
         const options = { new: true, runValidators: true };
-        const result = await Model.findByIdAndUpdate(
+        const result = await User.findByIdAndUpdate(
             id, updatedData, options
         )
         res.status(200).send(result)
@@ -78,7 +78,7 @@ router.patch('/setUserApi/:id', async (req, res) => {
             splinter: req.body.splinter,
         }
         const options = { new: true };
-        const result = await Model.findByIdAndUpdate(
+        const result = await User.findByIdAndUpdate(
             id, userData, options
         )
         res.status(200).send(result)
@@ -92,7 +92,7 @@ router.patch('/setUserApi/:id', async (req, res) => {
 router.delete('/delete/:id', async (req, res) => {
     try {
         const id = req.params.id;
-        const data = await Model.findByIdAndDelete(id)
+        const data = await User.findByIdAndDelete(id)
         res.send(`Document with username \'${data.username}\' has been deleted..`)
     }
     catch (error) {
