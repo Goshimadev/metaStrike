@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const User = require('../models/User');
 const Guild = require('../models/Guild');
+const Match = require('../models/Match');
 module.exports = router;
 
 //Get All Users
@@ -160,6 +161,32 @@ router.delete('/deleteGuildApi/:id', async (req, res) => {
         const id = req.params.id;
         const data = await Guild.findByIdAndDelete(id)
         res.send(`Guild with name \'${data.name}\' has been deleted..`)
+    }
+    catch (error) {
+        res.status(400).json({ message: error.message })
+    }
+})
+
+// Match APIs
+
+// Get Single Match
+router.get('/getMatchApi/:id', async (req, res) => {
+    try{
+        const id = req.params.id;
+        const data = await Match.findById(id);
+        res.status(200).json(data)
+    }
+    catch(error){
+        res.status(500).json({message: error.message})
+    }
+})
+
+// Set Match
+router.post('/setMatchApi', async (req, res) => {
+    const data = new Match( req.body )
+    try {
+        const dataToSave = await data.save();
+        res.status(200).json(dataToSave)
     }
     catch (error) {
         res.status(400).json({ message: error.message })
