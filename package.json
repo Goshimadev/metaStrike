@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "Backend APIs for MetaStrike",
   "main": "index.js",
+  "engines": {
+    "node": "14.x"
+  },
   "scripts": {
     "start": "nodemon public/index.js"
   },
